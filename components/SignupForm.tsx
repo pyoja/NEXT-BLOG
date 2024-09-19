@@ -20,9 +20,9 @@ export default function SignupForm() {
     });
     const data = await response.json();
     if (data.exists) {
-      setUsernameError("Username already exists");
+      setUsernameError("이미 존재하는 아이디입니다.");
     } else {
-      setUsernameError("");
+      setUsernameError("사용할 수 있는 아이디입니다.");
     }
   };
 
@@ -41,7 +41,7 @@ export default function SignupForm() {
       body: JSON.stringify({ username, name, password }),
     });
     if (response.ok) {
-      router.push("/login");
+      router.push("/");
     } else {
       const data = await response.json();
       console.error(data.error);
@@ -113,7 +113,7 @@ export default function SignupForm() {
       </Button>
       <Typography variant="body2" align="center">
         Already have an account?{" "}
-        <Button onClick={() => router.push("/login")}>Login</Button>
+        <Button onClick={() => router.push("/")}>Login</Button>
       </Typography>
     </Box>
   );
