@@ -6,13 +6,13 @@ import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
-  const { username, name, password } = await request.json();
+  const { id, name, password } = await request.json();
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await prisma.user.create({
+    const user = await prisma.tbl_user.create({
       data: {
-        username,
+        id,
         name,
         password: hashedPassword,
       },
