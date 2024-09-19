@@ -4,14 +4,24 @@ import { TextField, Button, Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
-  const [username, setUsername] = useState("");
+  const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement login logic
-    console.log("Login attempted with:", username, password);
+    const response = await fetch("/api/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, password }),
+    });
+    if (response.ok) {
+      alert("로그인 성공");
+    } else {
+      const data = await response.json();
+      console.error(data.error);
+      alert("로그인 실패");
+    }
   };
 
   const handleSignup = () => {
@@ -29,13 +39,13 @@ export default function LoginForm() {
         margin="normal"
         required
         fullWidth
-        id="username"
-        label="Username"
-        name="username"
-        autoComplete="username"
+        id="id"
+        label="id"
+        name="id"
+        autoComplete="id"
         autoFocus
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        value={id}
+        onChange={(e) => setId(e.target.value)}
       />
       <TextField
         margin="normal"
