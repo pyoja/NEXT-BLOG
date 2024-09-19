@@ -70,7 +70,7 @@ export default function SignupForm() {
         helperText={idEroor}
       />
       <Button onClick={handleUsernameCheck} variant="outlined" sx={{ mt: 1 }}>
-        Check Availability
+        ID 중복체크
       </Button>
       <TextField
         margin="normal"
@@ -109,11 +109,11 @@ export default function SignupForm() {
         helperText={passwordError}
       />
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-        Sign Up
+        회원가입
       </Button>
       <Typography variant="body2" align="center">
-        Already have an account?{" "}
-        <Button onClick={() => router.push("/")}>Login</Button>
+        이미 계정이 있으신가요?{" "}
+        <Button onClick={() => router.push("/")}>로그인</Button>
       </Typography>
     </Box>
   );

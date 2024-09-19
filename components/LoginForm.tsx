@@ -17,6 +17,7 @@ export default function LoginForm() {
     });
     if (response.ok) {
       alert("로그인 성공");
+      router.push("/dashboard");
     } else {
       const data = await response.json();
       console.error(data.error);
@@ -60,7 +61,7 @@ export default function LoginForm() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-        Login
+        로그인
       </Button>
       <Button
         fullWidth
@@ -68,7 +69,7 @@ export default function LoginForm() {
         onClick={handleSignup}
         sx={{ mt: 1 }}
       >
-        Sign Up
+        회원가입
       </Button>
     </Box>
   );
