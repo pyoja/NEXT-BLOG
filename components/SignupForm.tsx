@@ -4,25 +4,25 @@ import { TextField, Button, Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 export default function SignupForm() {
-  const [username, setUsername] = useState("");
+  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [usernameError, setUsernameError] = useState("");
+  const [idEroor, setidEroor] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const router = useRouter();
 
   const handleUsernameCheck = async () => {
-    const response = await fetch("/api/check-username", {
+    const response = await fetch("/api/check-id", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username }),
+      body: JSON.stringify({ id }),
     });
     const data = await response.json();
     if (data.exists) {
-      setUsernameError("이미 존재하는 아이디입니다.");
+      setidEroor("이미 존재하는 아이디입니다.");
     } else {
-      setUsernameError("사용할 수 있는 아이디입니다.");
+      setidEroor("사용할 수 있는 아이디입니다.");
     }
   };
 
@@ -32,13 +32,13 @@ export default function SignupForm() {
       setPasswordError("Passwords do not match");
       return;
     }
-    if (usernameError) {
+    if (idEroor) {
       return;
     }
     const response = await fetch("/api/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, name, password }),
+      body: JSON.stringify({ id, name, password }),
     });
     if (response.ok) {
       router.push("/");
@@ -64,10 +64,10 @@ export default function SignupForm() {
         name="username"
         autoComplete="username"
         autoFocus
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        error={!!usernameError}
-        helperText={usernameError}
+        value={id}
+        onChange={(e) => setId(e.target.value)}
+        error={!!idEroor}
+        helperText={idEroor}
       />
       <Button onClick={handleUsernameCheck} variant="outlined" sx={{ mt: 1 }}>
         Check Availability
