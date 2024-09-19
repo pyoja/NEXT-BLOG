@@ -15,9 +15,7 @@ export default function LoginForm() {
   };
 
   const handleSignup = () => {
-    // TODO: Implement navigation to signup page
-    console.log("Navigating to signup page");
-    // router.push('/signup');
+    router.push("/signup");
   };
 
   return (
